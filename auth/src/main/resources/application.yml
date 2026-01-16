@@ -1,12 +1,16 @@
 spring:
   application:
     name: auth
+#    TODO: update the auth config here or die asap!!!!!
   datasource:
-    url: jdbc:postgresql://super-bush
-    username: owner
-    password: DONTSTEALMYPASS
+    url: jdbc:postgresql://hell
+    username: hell
+    password: devil
   sql:
     init:
       mode: always
 server:
-  port: 8005
+  port: 8002
+logging:
+  level:
+    org.springframework.security: TRACE

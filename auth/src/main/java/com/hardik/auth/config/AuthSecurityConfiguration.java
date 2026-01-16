@@ -47,6 +47,7 @@ class AuthSecurityConfiguration {
         return new JdbcUserDetailsManager(dataSource);
     }
 
+    // Instead define bean of JdbcRegisteredClientRepository or something idk anymore tbh look at the sample and try to understnad
     @Bean
     RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
         JdbcRegisteredClientRepository jdbcRegisteredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
