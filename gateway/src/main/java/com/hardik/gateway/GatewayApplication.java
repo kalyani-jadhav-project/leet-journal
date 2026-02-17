@@ -50,4 +50,14 @@ public class GatewayApplication {
                 .GET("/ai/**", http())
                 .build();
     }
+
+    @Bean
+    RouterFunction<ServerResponse> executionRoute(){
+        return route ()
+                .before(BeforeFilterFunctions.uri("http://localhost:8001/"))
+                .before(BeforeFilterFunctions.rewritePath("/code/", "/"))
+                .filter(TokenRelayFilterFunctions.tokenRelay())
+                .GET("/code/**", http())
+                .build();
+    }
 }

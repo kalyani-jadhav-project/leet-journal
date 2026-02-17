@@ -1,4 +1,4 @@
 ### GET request to mail server
-GET http://127.0.0.1:9000/mail/mime?to=rogzeus697@gmail.com&subject=Hello&text=World
+GET http://127.0.0.1:9000/mail/mime?to=rogzeus697@gmail.com&subject="Leet Jounal Subject"&text="App Testing Demo Email"
 
 ###
