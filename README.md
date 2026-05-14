@@ -70,6 +70,10 @@ The services are intentionally separate so they can be developed, tested, and de
 - SMTP credentials for mail delivery
 - Google GenAI API key for the AI service
 
+## Project Version
+
+The current repository version is tracked in the root `VERSION` file.
+
 ## Configuration
 
 Common local defaults are defined in each service’s `application.yml` or `application.yaml` file.
