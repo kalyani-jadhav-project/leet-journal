@@ -10,6 +10,20 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: db
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U user -d db"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     strategy:
       fail-fast: false
       matrix:
@@ -35,4 +49,27 @@ jobs:
           cache: maven
           cache-dependency-path: "**/pom.xml"
 
+      - name: Start auth service dependency
+        if: matrix.service == 'gateway' || matrix.service == 'problems-service'
+        run: |
+          mvn -B -ntp -f "$GITHUB_WORKSPACE/auth/pom.xml" spring-boot:run > /tmp/auth.log 2>&1 &
+          echo "AUTH_PID=$!" >> "$GITHUB_ENV"
+          for _ in {1..60}; do
+            if curl -fsS http://localhost:8000/.well-known/openid-configuration >/dev/null; then
+              echo "Auth service is ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Auth service failed to start"
+          tail -n 200 /tmp/auth.log || true
+          exit 1
+
       - run: mvn -B -ntp verify
+
+      - name: Stop auth service dependency
+        if: always() && (matrix.service == 'gateway' || matrix.service == 'problems-service')
+        run: |
+          if [ -n "${AUTH_PID:-}" ]; then
+            kill "$AUTH_PID" || true
+          fi
