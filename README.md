@@ -1,4 +1,7 @@
 # Leet Journal
+# GSSOC'26 contributors [read this first](https://github.com/hardikxk/leet-journal/discussions/30#discussion-10072805)
+<img width="1080" height="1080" alt="image" src="https://github.com/user-attachments/assets/2b3f0211-f6c5-47bd-b664-72e0758318da" />
+
 
 Leet Journal is a Spring Boot microservices project for tracking LeetCode progress, managing problem metadata, authenticating users, sending mail, and experimenting with AI-assisted problem solving.
 
@@ -70,6 +73,10 @@ The services are intentionally separate so they can be developed, tested, and de
 - SMTP credentials for mail delivery
 - Google GenAI API key for the AI service
 
+## Project Version
+
+The current repository version is tracked in the root `VERSION` file.
+
 ## Configuration
 
 Common local defaults are defined in each service’s `application.yml` or `application.yaml` file.
@@ -123,4 +130,38 @@ Repeat the same pattern for the other services.
 - [Project Setup Guide](SETUP.md)
 
 ## Project Status
+This project is under active development and is intended to grow as an open source learning platform for LeetCode practice and DSA tooling.
+Contributions are welcome. If you are planning a larger change, open an issue first so the approach can be aligned before implementation.
+
+### How to contribute
+
+1. Fork the repository.
+2. Create a feature branch from `master`.
+3. Make the smallest focused change that solves the problem.
+4. Run the relevant service tests before opening a pull request.
+5. Open a pull request with a clear description of the change and any setup or verification steps.
+
+### What I look for
+
+- Small, reviewable pull requests.
+- Clear commit messages and PR descriptions.
+- Tests for new behavior when practical.
+- Documentation (future implementation) updates when behavior or setup changes.
+
+### Resources that can help you
+- The Spring Documentation.
+	- [Spring Authorization Server](https://docs.spring.io/spring-authorization-server/reference/index.html)
+    - [Spring Cloud Gateway WebMVC](https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway-server-webmvc.html)
+    - [Spring AI](https://docs.spring.io/spring-ai/reference/)
+- [Dan Vega's](https://www.youtube.com/@DanVega) youtube tutorials.
+
+### Coding conventions
+
+- Follow the existing Spring Boot structure in each service.
+- Keep controllers thin and push business logic into services.
+- Prefer explicit configuration in the service `application.yml` files.
+- Avoid introducing unnecessary dependencies unless they materially improve the codebase.
+
+## Project Status
+
 This project is under active development and is intended to grow as an open source learning platform for LeetCode practice and DSA tooling.
